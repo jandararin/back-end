@@ -25,7 +25,7 @@ app.add_middleware(CORSMiddleware, allow_origins=origins, allow_credentials=True
 # load_dotenv()
 
 # 環境変数を参照
-DB_URL = os.environ.getenv('DB_URL')
+DB_URL = os.environ.get('DB_URL')
 
 
 @app.on_event("startup")
