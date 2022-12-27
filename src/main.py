@@ -6,7 +6,7 @@ from endpoint.user import userRouter
 from endpoint.ticket import ticketRouter
 from model.data.user import User
 from model.data.ticket import Ticket
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os
 
 
@@ -22,15 +22,15 @@ app.add_middleware(CORSMiddleware, allow_origins=origins, allow_credentials=True
 
 
 # .envから環境変数を読み込む
-load_dotenv()
+# load_dotenv()
 
 # 環境変数を参照
-DB_URL = os.getenv('DB_URL')
+DB_URL = os.environ.getenv('DB_URL')
 
 
 @app.on_event("startup")
 async def app_init():
-    client = motor.motor_asyncio.AsyncIOMotorClient(f'{DB_URL}')
+    client = motor.motor_asyncio.AsyncIOMotorClient(DB_URL)
     await init_beanie(client.sveltekit, document_models=[User, Ticket])
 
 
